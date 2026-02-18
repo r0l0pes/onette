@@ -57,6 +57,10 @@ import '../styles/global.css';
         </script>
         
         <script is:inline>
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
             function setLanguage(lang) {
                 document.body.classList.remove('lang-en', 'lang-de');
                 document.body.classList.add(`lang-${lang}`);
@@ -175,7 +179,7 @@ import '../styles/global.css';
 
 					<!-- Logo -->
 					<!-- Logo -->
-					<div class="flex flex-col items-center cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+					<div class="flex flex-col items-center cursor-pointer" onclick="scrollToTop()">
 						<img src="/images/logo-onette-removebg.png" alt="Onette Berlin" class="h-32 md:h-48 w-auto object-contain mix-blend-multiply dark:invert" />
 					</div>
 
@@ -764,6 +768,17 @@ import '../styles/global.css';
                             </p>
 						</div>
 					</div>
+
+                    <!-- Back to Top -->
+                    <div class="flex items-center justify-center md:justify-end w-full md:w-auto">
+                        <button onclick="scrollToTop()" class="flex items-center gap-2 group text-primary hover:text-ink transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-widest border-b border-primary/20 group-hover:border-primary transition-all">
+                                <span class="lang-en">Back to Top</span>
+                                <span class="lang-de">Nach Oben</span>
+                            </span>
+                            <span class="material-symbols-outlined text-sm rotate-[-45deg] group-hover:translate-y-[-2px] transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
 
 				</div>
 			</footer>
