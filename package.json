@@ -1,0 +1,19 @@
+{
+    "name": "onette-berlin",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/tailwind": "^5.1.0",
+        "astro": "^4.4.0",
+        "tailwindcss": "^3.4.1",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/container-queries": "^0.1.1"
+    }
+}
