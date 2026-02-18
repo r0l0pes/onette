@@ -635,7 +635,7 @@ import '../styles/global.css';
                     <div class="relative group max-w-screen-xl mx-auto">
                         <div id="testimonials-track" class="scrolling-wrapper flex gap-8 px-6 overflow-x-auto snap-x snap-mandatory pb-8">
                             <!-- Mit Vergnuegen -->
-                            <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white dark:bg-ink p-8 rounded-xl shadow-sm border border-ink/5">
+                            <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white/60 dark:bg-ink/60 p-8 rounded-xl shadow-sm border border-ink/5 backdrop-blur-sm">
                                 <div class="h-full flex flex-col justify-between">
                                     <div>
                                         <p class="lang-en text-lg italic leading-relaxed text-ink dark:text-white">"Onette is the new spot in the neighborhood where you leave full, happy, and guaranteed to want a second visit."</p>
@@ -646,7 +646,7 @@ import '../styles/global.css';
                             </div>
 
                             <!-- CeeCee -->
-                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white dark:bg-ink p-8 rounded-xl shadow-sm border border-ink/5">
+                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white/60 dark:bg-ink/60 p-8 rounded-xl shadow-sm border border-ink/5 backdrop-blur-sm">
                                 <div class="h-full flex flex-col justify-between">
                                     <div>
                                         <p class="lang-en text-lg italic leading-relaxed text-ink dark:text-white">"Tamara and Brie have created a corner restaurant that feels as if it has always been there... serving exactly what is often missing."</p>
@@ -657,7 +657,7 @@ import '../styles/global.css';
                             </div>
 
                             <!-- tipBerlin -->
-                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white dark:bg-ink p-8 rounded-xl shadow-sm border border-ink/5">
+                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white/60 dark:bg-ink/60 p-8 rounded-xl shadow-sm border border-ink/5 backdrop-blur-sm">
                                 <div class="h-full flex flex-col justify-between">
                                     <div>
                                         <p class="lang-en text-lg italic leading-relaxed text-ink dark:text-white">"The restaurant is rustic and contemporary at the same time—and thus a great stroke of luck for the city."</p>
@@ -668,7 +668,7 @@ import '../styles/global.css';
                             </div>
                             
                              <!-- Berlin Food Stories -->
-                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white dark:bg-ink p-8 rounded-xl shadow-sm border border-ink/5">
+                             <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white/60 dark:bg-ink/60 p-8 rounded-xl shadow-sm border border-ink/5 backdrop-blur-sm">
                                 <div class="h-full flex flex-col justify-between">
                                     <div>
                                         <p class="lang-en text-lg italic leading-relaxed text-ink dark:text-white">"Tucked on a corner in Schöneberg, [Onette] brings together the best American diner culture and classic German café vibes."</p>
@@ -679,7 +679,7 @@ import '../styles/global.css';
                             </div>
 
                             <!-- Jaeger und Sammler -->
-                            <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white dark:bg-ink p-8 rounded-xl shadow-sm border border-ink/5">
+                            <div class="snap-center shrink-0 w-[85vw] md:w-[400px] bg-white/60 dark:bg-ink/60 p-8 rounded-xl shadow-sm border border-ink/5 backdrop-blur-sm">
                                 <div class="h-full flex flex-col justify-between">
                                     <div>
                                         <p class="lang-en text-lg italic leading-relaxed text-ink dark:text-white">"US diner vibes meet lace curtains and Spreewald pickles. A combination that clearly hits the bullseye."</p>
@@ -698,6 +698,15 @@ import '../styles/global.css';
                             <span class="material-symbols-outlined">chevron_right</span>
                         </button>
                     </div>
+
+                    <!-- Indicators -->
+                    <div class="flex justify-center gap-3 mt-8">
+                        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary scale-125 transition-all duration-300" data-index="0" aria-label="Slide 1"></button>
+                        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/20 transition-all duration-300 hover:bg-primary/40" data-index="1" aria-label="Slide 2"></button>
+                        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/20 transition-all duration-300 hover:bg-primary/40" data-index="2" aria-label="Slide 3"></button>
+                        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/20 transition-all duration-300 hover:bg-primary/40" data-index="3" aria-label="Slide 4"></button>
+                        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/20 transition-all duration-300 hover:bg-primary/40" data-index="4" aria-label="Slide 5"></button>
+                    </div>
                 </section>
 
                 <script is:inline>
@@ -707,7 +716,29 @@ import '../styles/global.css';
                         const nextBtn = document.getElementById('next-testimonial');
                         
                         if (track && prevBtn && nextBtn) {
-                            const scrollAmount = 400; // Approximate card width
+                            const dots = document.querySelectorAll('.testimonial-dot');
+                            const scrollAmount = track.querySelector('.snap-center')?.offsetWidth + 32 || 432;
+
+                            const updateDots = () => {
+                                const index = Math.round(track.scrollLeft / scrollAmount);
+                                dots.forEach((dot, i) => {
+                                    if (i === index) {
+                                        dot.classList.add('bg-primary', 'scale-125');
+                                        dot.classList.remove('bg-primary/20');
+                                    } else {
+                                        dot.classList.remove('bg-primary', 'scale-125');
+                                        dot.classList.add('bg-primary/20');
+                                    }
+                                });
+                            };
+
+                            track.addEventListener('scroll', updateDots);
+
+                            dots.forEach((dot, i) => {
+                                dot.addEventListener('click', () => {
+                                    track.scrollTo({ left: i * scrollAmount, behavior: 'smooth' });
+                                });
+                            });
 
                             prevBtn.addEventListener('click', () => {
                                 track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
