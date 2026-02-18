@@ -85,14 +85,25 @@ import '../styles/global.css';
                 });
 
                 // Hero carousel
-                const slides = document.querySelectorAll('.hero-slide');
-                if (slides.length > 1) {
+                const heroSlides = document.querySelectorAll('.hero-slide');
+                if (heroSlides.length > 1) {
                     let current = 0;
                     setInterval(() => {
-                        slides[current].style.opacity = '0';
-                        current = (current + 1) % slides.length;
-                        slides[current].style.opacity = '1';
+                        heroSlides[current].style.opacity = '0';
+                        current = (current + 1) % heroSlides.length;
+                        heroSlides[current].style.opacity = '1';
                     }, 5000);
+                }
+
+                // Food carousel
+                const foodSlides = document.querySelectorAll('.food-slide');
+                if (foodSlides.length > 1) {
+                    let current = 0;
+                    setInterval(() => {
+                        foodSlides[current].style.opacity = '0';
+                        current = (current + 1) % foodSlides.length;
+                        foodSlides[current].style.opacity = '1';
+                    }, 4000);
                 }
 
                 // Testimonials carousel
@@ -149,9 +160,9 @@ import '../styles/global.css';
 
 					<!-- Desktop Nav Right -->
 					<nav class="hidden md:flex items-center gap-8 text-xs font-bold tracking-[0.2em] uppercase text-ink/70">
-						<a href="#location" class="hover:text-primary transition-colors">
-                            <span class="lang-en">Location</span>
-                            <span class="lang-de">Standort</span>
+						<a href="https://maps.app.goo.gl/pzd6XKM2kFeQbdTJA" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+                            <span class="lang-en">Directions</span>
+                            <span class="lang-de">Karte</span>
                         </a>
                         <div class="flex items-center gap-2 border-l border-ink/10 pl-8 ml-2">
                              <button class="lang-toggle hover:text-primary transition-colors uppercase" data-lang="en">EN</button>
@@ -178,20 +189,20 @@ import '../styles/global.css';
 				<div class="relative p-0 h-[60vh] md:h-[85vh] w-full overflow-hidden">
 					<!-- Slides -->
 					<div id="hero-slides" class="absolute inset-0">
-						<div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/hero-wide.png");'></div>
-						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place-window.jpg");'></div>
-						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place-counter.jpg");'></div>
-						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place-booths.webp");'></div>
+						<div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place/1.jpg");'></div>
+						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place/2.jpg");'></div>
+						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place/3.png");'></div>
+						<div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("/images/place/4.webp");'></div>
 					</div>
 
 					<div class="relative z-10 h-full flex flex-col items-center justify-end pb-16 md:pb-24 px-6 text-center max-w-screen-xl mx-auto">
 						<span class="text-white text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase border border-white/30 px-4 py-1.5 md:px-6 md:py-2 rounded-full w-fit backdrop-blur-sm mb-6">
 							Schöneberg Soul
 						</span>
-						<h1 class="text-white text-6xl md:text-8xl lg:text-9xl font-medium leading-[0.85] italic drop-shadow-lg mb-6 max-w-none mx-auto lg:whitespace-nowrap">
+						<h1 class="text-white text-6xl md:text-8xl lg:text-9xl font-medium leading-[0.85] italic drop-shadow-lg mb-6 max-w-none mx-auto md:whitespace-nowrap">
 							New York <span class="not-italic">Style.</span>
 						</h1>
-						<p class="text-white/90 text-base md:text-xl font-light leading-relaxed max-w-none mx-auto drop-shadow-md lg:whitespace-nowrap px-6">
+						<p class="text-white/90 text-base md:text-xl font-light leading-relaxed max-w-none mx-auto drop-shadow-md md:whitespace-nowrap px-6">
                             <span class="lang-en">A classic European luncheonette reimagined for modern Berlin life.</span>
                             <span class="lang-de">Ein klassisches europäisches Luncheonette, neu interpretiert für das moderne Berliner Leben.</span>
 						</p>
@@ -513,7 +524,11 @@ import '../styles/global.css';
 				<section class="w-full bg-ink py-20 md:py-32 overflow-hidden relative">
 					<div class="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 						<div class="relative w-full aspect-[4/5] md:aspect-square overflow-hidden shadow-2xl transition-all duration-1000">
-							<img alt="Onette interior with window light and wooden furniture" class="object-cover w-full h-full" src="/images/interior-window.png"/>
+							<div class="food-slide absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center" style='background-image: url("/images/food/Screenshot 2026-02-09 at 02.01.44.png");'></div>
+							<div class="food-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: url("/images/food/Screenshot 2026-02-09 at 02.02.19.png");'></div>
+							<div class="food-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: url("/images/food/Screenshot 2026-02-09 at 02.02.29.png");'></div>
+							<div class="food-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: url("/images/food/Screenshot 2026-02-09 at 02.05.02.png");'></div>
+							<div class="food-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style='background-image: url("/images/food/Screenshot 2026-02-09 at 14.10.48.png");'></div>
 						</div>
 						<div class="text-center md:text-left text-white p-4 md:p-12">
 							<p class="text-white/50 text-[10px] uppercase tracking-[0.3em] mb-4 md:mb-6"><span class="lang-en">Established 2024</span><span class="lang-de">Gegründet 2024</span></p>
